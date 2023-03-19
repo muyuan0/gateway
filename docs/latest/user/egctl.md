@@ -397,7 +397,6 @@ For example, this will provide the same result as the above:
 
 ```shell
 cat <<EOF | egctl x translate --add-missing-resources --from gateway-api --to xds -t route -f -
-apiVersion: gateway.networking.k8s.io/v1beta1
 kind: GatewayClass
 metadata:
   name: eg
