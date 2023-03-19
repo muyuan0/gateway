@@ -36,8 +36,9 @@ func Get() Info {
 var (
 	envoyGatewayVersion string
 	gatewayAPIVersion   string
-	envoyProxyVersion   = strings.Split(ir.DefaultProxyImage, ":")[1]
-	gitCommitID         string
+
+	envoyProxyVersion = strings.Split(ir.DefaultProxyImage, ":")[1]
+	gitCommitID       string
 )
 
 func init() {
