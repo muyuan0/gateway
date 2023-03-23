@@ -83,11 +83,6 @@ jobs:
       with:
         name: envoy-gateway
         path: bin/
-    
-    - name: Give Privileges To EG Binaries
-      run: |
-        chmod +x bin/linux/amd64/envoy-gateway
-        chmod +x bin/linux/arm64/envoy-gateway
 
     # conformance
     - name: Run Conformance Tests 
