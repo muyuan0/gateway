@@ -151,6 +151,8 @@ func (t *Translator) validateListenerConditions(listener *ListenerContext) (isRe
 	if len(lConditions) == 0 {
 		listener.SetCondition(v1beta1.ListenerConditionAccepted, metav1.ConditionTrue, v1beta1.ListenerReasonReady,
 			"Listener has been successfully translated")
+		listener.SetCondition(v1beta1.ListenerConditionProgrammed, metav1.ConditionTrue, v1beta1.ListenerReasonProgrammed,
+			"Sending translated listener configuration to the data plane")
 		return true
 
 	}
