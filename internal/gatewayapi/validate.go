@@ -149,14 +149,16 @@ func (t *Translator) validateBackendService(backendRef *v1alpha2.BackendRef, par
 func (t *Translator) validateListenerConditions(listener *ListenerContext) (isReady bool) {
 	lConditions := listener.GetConditions()
 	if len(lConditions) == 0 {
+		listener.SetCondition(v1beta1.ListenerConditionAccepted, metav1.ConditionTrue, v1beta1.ListenerReasonReady,
+			"Listener has been successfully translated")
 		listener.SetCondition(v1beta1.ListenerConditionProgrammed, metav1.ConditionTrue, v1beta1.ListenerReasonProgrammed,
-			"Listener is ready")
+			"Sending translated listener configuration to the data plane")
 		return true
 
 	}
-	// Any condition on the listener apart from Ready=true indicates an error.
+	// Any condition on the listener apart from Programmed=true indicates an error.
 	if !(lConditions[0].Type == string(v1beta1.ListenerConditionProgrammed) && lConditions[0].Status == metav1.ConditionTrue) {
-		// set "Ready: false" if it's not set already.
+		// set "Programmed: false" if it's not set already.
 		var hasReadyCond bool
 		for _, existing := range lConditions {
 			if existing.Type == string(v1beta1.ListenerConditionProgrammed) {
